@@ -1,4 +1,3 @@
-#!/usr/bin/js
 'use strict'
 
 let factorial = (n) => 
@@ -24,5 +23,10 @@ let look_ma_no_curly_braces = (n) => (
 )
 
 console.log(factorial(5))
-console.log(tail_factorial(7))
-console.log(look_ma_no_curly_braces(10))
+// 120
+
+console.log(tail_factorial(6))
+// 720
+
+console.log(look_ma_no_curly_braces(7))
+// 5040
