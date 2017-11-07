@@ -1,4 +1,4 @@
-#!/usr/bin/js
+/*#!/usr/bin/js*/
 'use strict'
 
 // Evaluate according to lambda calculus application rules. For instance, [+ 2 3] should return 5.
