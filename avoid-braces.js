@@ -7,20 +7,30 @@
  * Accepts a parameter, bounce, which should have either bounce.next or
  * bounce.result. If bounce.next exists, it will be called, else bounce.result
  * will be returned.
+ *
+ * ED: I can't figure out how to do this with no curly braces.
  */
-const trampoline = (bounce) =>
-	("next" in bounce)
-	? bounce.next()
-	: bounce.result
+const trampoline = (bounce) => {
+	while ('next' in bounce) bounce = bounce.next()
+	return bounce.result
+}
 
 /**
- * A helper function to create an object with properties (hard to do without
- * braces!)
+ * A really, REALLY simple test of trampoline.
  */
-const assoc = (obj, kvPairs) => (
-	obj || new Object,
-	obj
-)
+const countdownStep = (n) => (
+	(bounce) => (
+		bounce = new Object,
+		(n == 0)
+			? bounce.result = "Blastoff!"
+			: bounce.next = () => (
+				console.log(n),
+				countdownStep(n-1)
+			),
+		bounce
+	)
+)()
+const countdown = (n) => trampoline(countdownStep(n))
 
 
 /**
@@ -42,3 +52,6 @@ console.log("Object created without braces: " + (
 )
 
 console.log("Was scope violated? Global foo is now " + typeof foo)
+
+console.log("Countdown from 10")
+console.log(countdown(10))
